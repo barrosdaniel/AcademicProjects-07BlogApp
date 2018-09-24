@@ -1,3 +1,11 @@
+.main.container {
+    margin-top: 6em;
+}
+
 i.icon {
     font-size: 1.5em;
+}
+
+div.ui.main.text.container.segment {
+    padding-bottom: 4em;
 }

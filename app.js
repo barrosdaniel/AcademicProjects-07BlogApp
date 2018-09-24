@@ -27,10 +27,8 @@ var blogSchema = new mongoose.Schema({
 // Mongoose model
 var Blog = mongoose.model('Blog', blogSchema);
 
-// Mock-up data creation
-
 // RESTful ROUTES
-// Index route
+// Index routes
 app.get('/', function (req, res) {
     res.redirect('/blogs');
 });
@@ -44,6 +42,35 @@ app.get('/blogs', function (req, res) {
             res.render('index', {blogs: blogs});
         }
     });
+});
+
+// New route
+app.get('/blogs/new', function (req, res) {
+    res.render('new');
+});
+
+// Create route
+app.post('/blogs', function (req, res) {
+    Blog.create(req.body.blog, function (err, newBlog) {
+        if (err) {
+            console.log('Error writing to the database.');
+        } else {
+            console.log('New blog post successfully created.');
+            res.redirect('/blogs');
+        }
+    });
+});
+
+// Show route
+app.get('/blogs/:id', function (req, res) {
+   Blog.findById(req.params.id, function (err, foundBlog) {
+      if (err) {
+          console.log('Error connecting to the database.');
+      } else {
+          console.log('Data successfully retrieved from database.');
+          res.render('show', {blog: foundBlog});
+      } 
+   });
 });
 
 // Initialise server
