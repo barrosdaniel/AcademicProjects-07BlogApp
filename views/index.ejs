@@ -1,0 +1,14 @@
+<% include partials/header %>
+
+<h1>This is the Index file template</h1>
+
+<% blogs.forEach(function(blogEntry) { %>
+<div>
+<h2><%= blogEntry.title %></h2>
+<img src="<%= blogEntry.image %>" alt="Blog photo">
+<p><%= blogEntry.created %></p>
+<p><%= blogEntry.body %></p>
+</div>
+<% }) %>
+
+<% include partials/footer %>
