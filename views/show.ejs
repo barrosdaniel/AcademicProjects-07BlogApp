@@ -12,7 +12,7 @@
                     <p><%- blog.body %></p>
                 </div>
                 <a id="edit_button" href="/blogs/<%= blog._id %>/edit" class="ui secondary medium left floated grey button">Edit</a>
-                <form #id="delete_button" action="/blogs/<%= blog._id %>?_method=DELETE" method="post">
+                <form #id="delete_button" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
                     <button class="ui secondary medium left floated grey button">Delete</button>
                 </form>
             </div>

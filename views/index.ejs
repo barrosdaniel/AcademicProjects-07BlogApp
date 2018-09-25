@@ -1,14 +1,32 @@
 <% include partials/header %>
 
-<h1>This is the Index file template</h1>
-
-<% blogs.forEach(function(blogEntry) { %>
-    <div>
-        <h2><%= blogEntry.title %></h2>
-        <img src="<%= blogEntry.image %>" alt="Blog photo">
-        <p><%= blogEntry.created %></p>
-        <p><%- blogEntry.body.substring(0, 100) %>...<a href="/blogs/<%= blogEntry._id %>">Read more...</a></p>
+<div class="ui main text container">
+    <div class="ui huge header">Blog App</div>
+    <div class="ui top attached segment">
+        <div class="ui divided items">
+            <% blogs.forEach(function(blogEntry) { %>
+                <div class="item">
+                    <div class="image">
+                        <img src="<%= blogEntry.image %>" alt="Blog photo">
+                    </div>
+                    <div class="content">
+                        <a class="header" href="/blogs/<%= blogEntry._id %>"><%= blogEntry.title %></a>
+                        <div class="meta">
+                            <span><%= blogEntry.created.toDateString() %></span>
+                        </div>
+                        <div class="description">
+                            <p><%- blogEntry.body.substring(0, 100) %>...</p>
+                        </div>
+                        <div class="extra">
+                            <a class="ui secondary medium left floated grey button" href="/blogs/<%= blogEntry._id %>">
+                                Read more<i class="chevron right icon"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
     </div>
-<% }) %>
+</div>
 
 <% include partials/footer %>
