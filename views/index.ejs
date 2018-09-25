@@ -7,7 +7,7 @@
         <h2><%= blogEntry.title %></h2>
         <img src="<%= blogEntry.image %>" alt="Blog photo">
         <p><%= blogEntry.created %></p>
-        <p><%= blogEntry.body.substring(0, 100) %>...<a href="/blogs/<%= blogEntry._id %>">Read more...</a></p>
+        <p><%- blogEntry.body.substring(0, 100) %>...<a href="/blogs/<%= blogEntry._id %>">Read more...</a></p>
     </div>
 <% }) %>
 

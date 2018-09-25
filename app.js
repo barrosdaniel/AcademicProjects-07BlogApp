@@ -10,6 +10,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 var mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost:27017/blog_app", { useNewUrlParser: true });
 
+// Initialise method-override
+var methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
 // Initialise ejs
 app.set('view engine', 'ejs');
 
@@ -63,14 +67,50 @@ app.post('/blogs', function (req, res) {
 
 // Show route
 app.get('/blogs/:id', function (req, res) {
-   Blog.findById(req.params.id, function (err, foundBlog) {
-      if (err) {
-          console.log('Error connecting to the database.');
-      } else {
-          console.log('Data successfully retrieved from database.');
-          res.render('show', {blog: foundBlog});
-      } 
-   });
+    Blog.findById(req.params.id, function (err, foundBlog) {
+        if (err) {
+            console.log('Error connecting to the database.');
+        } else {
+            console.log('Data successfully retrieved from database.');
+            res.render('show', {blog: foundBlog});
+        } 
+    });
+});
+
+// Edit route
+app.get('/blogs/:id/edit', function (req, res) {
+    Blog.findById(req.params.id, function (err, foundBlog) {
+        if (err) {
+            console.log('Error connecting to the database.');
+        } else {
+            console.log('Data successfully retrieved from database.');
+            res.render('edit', {blog: foundBlog});
+        }
+    });
+});
+
+// Update route
+app.put('/blogs/:id', function (req, res) {
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function (err, updatedBlog) {
+        if (err) {
+            console.log('Error updating data in the database.');
+        } else {
+            console.log('Successfully updated data in the database.');
+            res.redirect('/blogs/' + req.params.id);
+        }
+    });
+});
+
+// Destroy route
+app.delete('/blogs/:id', function(req, res){
+    Blog.findByIdAndRemove(req.params.id, function (err) {
+        if (err) {
+            console.log('Error deleting data from the database.');
+        } else {
+            console.log('Successfully deleted data from the database');
+            res.redirect('/blogs');
+        }
+    });
 });
 
 // Initialise server

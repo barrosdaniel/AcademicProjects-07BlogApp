@@ -9,3 +9,10 @@ i.icon {
 div.ui.main.text.container.segment {
     padding-bottom: 4em;
 }
+
+#edit_button {
+    width: 80px;
+}
+#delete_button {
+    display: inline;
+}
